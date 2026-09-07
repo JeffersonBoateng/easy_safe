@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EasySafe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>EasySafe</h1>
+
+  <h2>Add a User</h2>
+  <form id="user-form">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Add User</button>
+  </form>
+
+  <h2>Users</h2>
+  <ul id="user-list"></ul>
+
+  <h2>Add an Account</h2>
+<form id="account-form">
+  <input type="number" id="acc-user-id" placeholder="User ID" required>
+  <input type="text" id="acc-name" placeholder="Account Name" required>
+  <input type="text" id="acc-type" placeholder="Type (e.g. checking, savings)" required>
+  <input type="number" id="acc-balance" placeholder="Starting Balance" step="0.01">
+  <button type="submit">Add Account</button>
+</form>
+
+<h2>Accounts</h2>
+<ul id="account-list"></ul>
+
+<h2>Add a Category</h2>
+<form id="category-form">
+  <input type="number" id="cat-user-id" placeholder="User ID" required>
+  <input type="text" id="cat-name" placeholder="Category Name (e.g. Food, Salary)" required>
+  <input type="text" id="cat-type" placeholder="Type (income or expense)" required>
+  <button type="submit">Add Category</button>
+</form>
+
+<h2>Categories</h2>
+<ul id="category-list"></ul>
+
+<h2>Add a Transaction</h2>
+<form id="transaction-form">
+  <input type="number" id="tx-account-id" placeholder="Account ID" required>
+  <input type="number" id="tx-category-id" placeholder="Category ID" required>
+  <input type="number" id="tx-amount" placeholder="Amount" step="0.01" required>
+  <input type="text" id="tx-type" placeholder="Type (deposit or withdrawal)" required>
+  <button type="submit">Add Transaction</button>
+</form>
+
+<h2>Transactions</h2>
+<ul id="transaction-list"></ul>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
