@@ -1,4 +1,4 @@
-const API_URL = 'http://127.0.0.1:5000';
+const API_URL = 'https://easysafe-backend.onrender.com';
 
 async function loadUsers() {
   const response = await fetch(`${API_URL}/users`);
