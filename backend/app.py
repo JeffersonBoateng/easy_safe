@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from werkzeug.security import generate_password_hash, check_password_hash
 import os
 from dotenv import load_dotenv
 import psycopg2
@@ -35,13 +36,41 @@ def create_user():
     cur = conn.cursor()
     cur.execute(
         'INSERT INTO users (name, email, password) VALUES (%s, %s, %s) RETURNING user_id;',
-        (data['name'], data['email'], data['password'])
+        (data['name'], data['email'], generate_password_hash(data['password']))
     )
     new_id = cur.fetchone()[0]
     conn.commit()
     cur.close()
     conn.close()
     return jsonify({'user_id': new_id, 'message': 'User created'}), 201
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    cur.execute('SELECT user_id, name, email, password FROM users WHERE email = %s;', (email,))
+    user = cur.fetchone()
+    cur.close()
+    conn.close()
+
+    if user is None:
+        return jsonify({'message': 'Invalid email or password'}), 401
+
+    if not check_password_hash(user['password'], password):
+        return jsonify({'message': 'Invalid email or password'}), 401
+
+    return jsonify({
+        'message': 'Login successful',
+        'user_id': user['user_id'],
+        'name': user['name'],
+        'email': user['email']
+    }), 200
+
 
 @app.route('/accounts')
 def get_accounts():
