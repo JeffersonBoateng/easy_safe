@@ -84,6 +84,35 @@ async function loadTransactions() {
   });
 }
 
+// ----- Add Account -----
+document.getElementById('toggle-add-account').addEventListener('click', () => {
+  document.getElementById('account-form').classList.toggle('hidden');
+});
+
+document.getElementById('account-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById('acc-name').value;
+  const account_type = document.getElementById('acc-type').value;
+  const balance = document.getElementById('acc-balance').value || 0;
+
+  await fetch(`${API_URL}/accounts`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      user_id: userData.user_id,
+      name,
+      account_type,
+      balance: Number(balance)
+    })
+  });
+
+  document.getElementById('account-form').reset();
+  document.getElementById('account-form').classList.add('hidden');
+  loadAccounts();
+});
+
+// ----- Add Transaction -----
 document.getElementById('toggle-add-tx').addEventListener('click', () => {
   document.getElementById('transaction-form').classList.toggle('hidden');
 });

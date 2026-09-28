@@ -118,7 +118,11 @@ main {
   align-items: center;
 }
 
-#toggle-add-tx {
+.section-header h3 {
+  margin: 0 0 8px;
+}
+
+.small-btn {
   background-color: #2c7a4b;
   color: white;
   border: none;
@@ -126,6 +130,10 @@ main {
   border-radius: 4px;
   cursor: pointer;
   font-size: 13px;
+}
+
+.small-btn:hover {
+  background-color: #256640;
 }
 
 .tx-form {

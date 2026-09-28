@@ -25,14 +25,28 @@
     </section>
 
     <section class="accounts-section">
-      <h3>Accounts</h3>
+      <div class="section-header">
+        <h3>Accounts</h3>
+        <button id="toggle-add-account" class="small-btn">+ Add Account</button>
+      </div>
+
+      <form id="account-form" class="tx-form hidden">
+        <input type="text" id="acc-name" placeholder="Account name (e.g. Savings)" required>
+        <select id="acc-type" required>
+          <option value="savings">Savings</option>
+          <option value="checking">Checking</option>
+        </select>
+        <input type="number" id="acc-balance" placeholder="Starting balance" step="0.01">
+        <button type="submit">Save Account</button>
+      </form>
+
       <ul id="account-list" class="account-list"></ul>
     </section>
 
     <section class="transactions-section">
       <div class="section-header">
         <h3>Recent Transactions</h3>
-        <button id="toggle-add-tx">+ Add Transaction</button>
+        <button id="toggle-add-tx" class="small-btn">+ Add Transaction</button>
       </div>
 
       <form id="transaction-form" class="tx-form hidden">
