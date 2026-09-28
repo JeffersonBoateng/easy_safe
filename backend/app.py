@@ -11,13 +11,16 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
+
 def get_db_connection():
     conn = psycopg2.connect(os.getenv('DATABASE_URL'))
     return conn
 
+
 @app.route('/')
 def home():
     return jsonify({'message': 'EasySafe backend is running'})
+
 
 @app.route('/users')
 def get_users():
@@ -28,6 +31,7 @@ def get_users():
     cur.close()
     conn.close()
     return jsonify(users)
+
 
 @app.route('/users', methods=['POST'])
 def create_user():
@@ -74,13 +78,18 @@ def login():
 
 @app.route('/accounts')
 def get_accounts():
+    user_id = request.args.get('user_id')
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-    cur.execute('SELECT * FROM accounts;')
+    if user_id:
+        cur.execute('SELECT * FROM accounts WHERE user_id = %s;', (user_id,))
+    else:
+        cur.execute('SELECT * FROM accounts;')
     accounts = cur.fetchall()
     cur.close()
     conn.close()
     return jsonify(accounts)
+
 
 @app.route('/accounts', methods=['POST'])
 def create_account():
@@ -97,15 +106,21 @@ def create_account():
     conn.close()
     return jsonify({'account_id': new_id, 'message': 'Account created'}), 201
 
+
 @app.route('/categories')
 def get_categories():
+    user_id = request.args.get('user_id')
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-    cur.execute('SELECT * FROM categories;')
+    if user_id:
+        cur.execute('SELECT * FROM categories WHERE user_id = %s;', (user_id,))
+    else:
+        cur.execute('SELECT * FROM categories;')
     categories = cur.fetchall()
     cur.close()
     conn.close()
     return jsonify(categories)
+
 
 @app.route('/categories', methods=['POST'])
 def create_category():
@@ -122,15 +137,26 @@ def create_category():
     conn.close()
     return jsonify({'category_id': new_id, 'message': 'Category created'}), 201
 
+
 @app.route('/transactions')
 def get_transactions():
+    user_id = request.args.get('user_id')
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-    cur.execute('SELECT * FROM transactions;')
+    if user_id:
+        cur.execute('''
+            SELECT t.* FROM transactions t
+            JOIN accounts a ON t.account_id = a.account_id
+            WHERE a.user_id = %s
+            ORDER BY t.transaction_date DESC;
+        ''', (user_id,))
+    else:
+        cur.execute('SELECT * FROM transactions;')
     transactions = cur.fetchall()
     cur.close()
     conn.close()
     return jsonify(transactions)
+
 
 @app.route('/transactions', methods=['POST'])
 def create_transaction():
@@ -146,6 +172,7 @@ def create_transaction():
     cur.close()
     conn.close()
     return jsonify({'transaction_id': new_id, 'message': 'Transaction created'}), 201
+
 
 if __name__ == '__main__':
     app.run(debug=True)

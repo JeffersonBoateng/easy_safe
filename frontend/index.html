@@ -2,60 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>EasySafe</title>
-  <link rel="stylesheet" href="style.css">
+  <title>EasySafe - Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-  <h1>EasySafe</h1>
+  <header class="topbar">
+    <h1>EasySafe</h1>
+    <div class="user-info">
+      <span id="welcome-msg"></span>
+      <button id="logout-btn">Logout</button>
+    </div>
+  </header>
 
-  <h2>Add a User</h2>
-  <form id="user-form">
-    <input type="text" id="name" placeholder="Name" required>
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="password" id="password" placeholder="Password" required>
-    <button type="submit">Add User</button>
-  </form>
+  <main>
+<section class="balance-card">
+  <p class="label">Total Balance</p>
+  <div class="balance-row">
+    <h2 id="total-balance">GHS 0.00</h2>
+    <button id="toggle-balance" aria-label="Toggle balance visibility">👁️</button>
+  </div>
+</section>
 
-  <h2>Users</h2>
-  <ul id="user-list"></ul>
+    <section class="accounts-section">
+      <h3>Accounts</h3>
+      <ul id="account-list" class="account-list"></ul>
+    </section>
 
-  <h2>Add an Account</h2>
-<form id="account-form">
-  <input type="number" id="acc-user-id" placeholder="User ID" required>
-  <input type="text" id="acc-name" placeholder="Account Name" required>
-  <input type="text" id="acc-type" placeholder="Type (e.g. checking, savings)" required>
-  <input type="number" id="acc-balance" placeholder="Starting Balance" step="0.01">
-  <button type="submit">Add Account</button>
-</form>
+    <section class="transactions-section">
+      <div class="section-header">
+        <h3>Recent Transactions</h3>
+        <button id="toggle-add-tx">+ Add Transaction</button>
+      </div>
 
-<h2>Accounts</h2>
-<ul id="account-list"></ul>
+      <form id="transaction-form" class="tx-form hidden">
+        <select id="tx-account-id" required></select>
+        <select id="tx-category-id" required></select>
+        <input type="number" id="tx-amount" placeholder="Amount" step="0.01" required>
+        <select id="tx-type" required>
+          <option value="deposit">Deposit</option>
+          <option value="withdrawal">Withdrawal</option>
+        </select>
+        <button type="submit">Save</button>
+      </form>
 
-<h2>Add a Category</h2>
-<form id="category-form">
-  <input type="number" id="cat-user-id" placeholder="User ID" required>
-  <input type="text" id="cat-name" placeholder="Category Name (e.g. Food, Salary)" required>
-  <input type="text" id="cat-type" placeholder="Type (income or expense)" required>
-  <button type="submit">Add Category</button>
-</form>
+      <ul id="transaction-list" class="transaction-list"></ul>
+    </section>
+  </main>
 
-<h2>Categories</h2>
-<ul id="category-list"></ul>
-
-<h2>Add a Transaction</h2>
-<form id="transaction-form">
-  <input type="number" id="tx-account-id" placeholder="Account ID" required>
-  <input type="number" id="tx-category-id" placeholder="Category ID" required>
-  <input type="number" id="tx-amount" placeholder="Amount" step="0.01" required>
-  <input type="text" id="tx-type" placeholder="Type (deposit or withdrawal)" required>
-  <button type="submit">Add Transaction</button>
-</form>
-
-<h2>Transactions</h2>
-<ul id="transaction-list"></ul>
-
-
-
-  <script src="script.js"></script>
+  <script src="dashboard.js"></script>
 </body>
 </html>
