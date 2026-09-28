@@ -125,7 +125,25 @@ body {
 }
 
 @media (max-width: 700px) {
+  .auth-container {
+    flex-direction: column;
+  }
+
   .auth-visual {
-    display: none;
+    flex: none;
+    min-width: 0;
+    padding: 24px 20px;
+    gap: 16px;
+  }
+
+  .tagline h2 {
+    font-size: 20px;
+    margin: 0;
+    max-width: none;
+  }
+
+  .auth-panel {
+    justify-content: flex-start;
+    padding: 24px 20px;
   }
 }
