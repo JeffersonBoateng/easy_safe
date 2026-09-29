@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasySafe - Accounts</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-logo">EasySafe</div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item">Dashboard</a>
+        <a href="accounts.html" class="nav-item active">Accounts</a>
+        <a href="categories.html" class="nav-item">Categories</a>
+        <a href="transactions.html" class="nav-item">Transactions</a>
+      </nav>
+
+      <button id="logout-btn" class="sidebar-logout">Logout</button>
+    </aside>
+
+    <div class="main-content">
+      <header class="content-topbar">
+        <h2 id="welcome-msg"></h2>
+      </header>
+
+      <section class="accounts-section">
+        <div class="section-header">
+          <h3>Accounts</h3>
+          <button id="toggle-add-account" class="small-btn">+ Add Account</button>
+        </div>
+
+        <form id="account-form" class="tx-form hidden">
+          <input type="text" id="acc-name" placeholder="Account name (e.g. Savings)" required>
+          <select id="acc-type" required>
+            <option value="savings">Savings</option>
+            <option value="checking">Checking</option>
+          </select>
+          <input type="number" id="acc-balance" placeholder="Starting balance" step="0.01">
+          <button type="submit">Save Account</button>
+        </form>
+
+        <ul id="account-list" class="account-list"></ul>
+      </section>
+
+      <footer class="site-footer">© 2026 EasySafe</footer>
+    </div>
+  </div>
+
+  <script src="accounts.js"></script>
+</body>
+</html>

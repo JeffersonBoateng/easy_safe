@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EasySafe - Dashboard</title>
+  <title>EasySafe - Categories</title>
   <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
@@ -12,9 +12,9 @@
       <div class="sidebar-logo">EasySafe</div>
 
       <nav class="sidebar-nav">
-        <a href="index.html" class="nav-item active">Dashboard</a>
+        <a href="index.html" class="nav-item">Dashboard</a>
         <a href="accounts.html" class="nav-item">Accounts</a>
-        <a href="categories.html" class="nav-item">Categories</a>
+        <a href="categories.html" class="nav-item active">Categories</a>
         <a href="transactions.html" class="nav-item">Transactions</a>
       </nav>
 
@@ -26,27 +26,28 @@
         <h2 id="welcome-msg"></h2>
       </header>
 
-      <section class="balance-card">
-        <p class="label">Total Balance</p>
-        <div class="balance-row">
-          <h2 id="total-balance">GHS 0.00</h2>
-          <button id="toggle-balance" aria-label="Toggle balance visibility">👁️</button>
-        </div>
-      </section>
-
-      <section class="transactions-section">
+      <section class="categories-section">
         <div class="section-header">
-          <h3>Recent Transactions</h3>
-          <a href="transactions.html" class="small-btn">View All</a>
+          <h3>Categories</h3>
+          <button id="toggle-add-category" class="small-btn">+ Add Category</button>
         </div>
 
-        <ul id="transaction-list" class="transaction-list"></ul>
+        <form id="category-form" class="tx-form hidden">
+          <input type="text" id="cat-name" placeholder="Category name (e.g. Food, Salary)" required>
+          <select id="cat-type" required>
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+          </select>
+          <button type="submit">Save Category</button>
+        </form>
+
+        <ul id="category-list" class="category-list"></ul>
       </section>
 
       <footer class="site-footer">© 2026 EasySafe</footer>
     </div>
   </div>
 
-  <script src="dashboard.js"></script>
+  <script src="categories.js"></script>
 </body>
 </html>
