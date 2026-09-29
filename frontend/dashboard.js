@@ -58,10 +58,17 @@ async function loadCategories() {
   const response = await fetch(`${API_URL}/categories?user_id=${userData.user_id}`);
   const categories = await response.json();
 
+  const list = document.getElementById('category-list');
+  list.innerHTML = '';
+
   const categorySelect = document.getElementById('tx-category-id');
   categorySelect.innerHTML = '';
 
   categories.forEach(cat => {
+    const li = document.createElement('li');
+    li.innerHTML = `<span>${cat.name}</span><span>${cat.category_type}</span>`;
+    list.appendChild(li);
+
     const option = document.createElement('option');
     option.value = cat.category_id;
     option.textContent = `${cat.name} (${cat.category_type})`;
@@ -110,6 +117,32 @@ document.getElementById('account-form').addEventListener('submit', async (e) => 
   document.getElementById('account-form').reset();
   document.getElementById('account-form').classList.add('hidden');
   loadAccounts();
+});
+
+// ----- Add Category -----
+document.getElementById('toggle-add-category').addEventListener('click', () => {
+  document.getElementById('category-form').classList.toggle('hidden');
+});
+
+document.getElementById('category-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById('cat-name').value;
+  const category_type = document.getElementById('cat-type').value;
+
+  await fetch(`${API_URL}/categories`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      user_id: userData.user_id,
+      name,
+      category_type
+    })
+  });
+
+  document.getElementById('category-form').reset();
+  document.getElementById('category-form').classList.add('hidden');
+  loadCategories();
 });
 
 // ----- Add Transaction -----

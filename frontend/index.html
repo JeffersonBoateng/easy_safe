@@ -43,6 +43,24 @@
       <ul id="account-list" class="account-list"></ul>
     </section>
 
+    <section class="categories-section">
+      <div class="section-header">
+        <h3>Categories</h3>
+        <button id="toggle-add-category" class="small-btn">+ Add Category</button>
+      </div>
+
+      <form id="category-form" class="tx-form hidden">
+        <input type="text" id="cat-name" placeholder="Category name (e.g. Food, Salary)" required>
+        <select id="cat-type" required>
+          <option value="expense">Expense</option>
+          <option value="income">Income</option>
+        </select>
+        <button type="submit">Save Category</button>
+      </form>
+
+      <ul id="category-list" class="category-list"></ul>
+    </section>
+
     <section class="transactions-section">
       <div class="section-header">
         <h3>Recent Transactions</h3>

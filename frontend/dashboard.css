@@ -87,24 +87,24 @@ main {
   opacity: 1;
 }
 
-.accounts-section, .transactions-section {
+.accounts-section, .categories-section, .transactions-section {
   background-color: white;
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 24px;
 }
 
-.accounts-section h3, .transactions-section h3 {
+.accounts-section h3, .categories-section h3, .transactions-section h3 {
   margin-top: 0;
 }
 
-.account-list, .transaction-list {
+.account-list, .category-list, .transaction-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.account-list li, .transaction-list li {
+.account-list li, .category-list li, .transaction-list li {
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
@@ -176,4 +176,22 @@ main {
   font-size: 12px;
   color: #888;
   padding: 20px 16px;
+}
+
+@media (min-width: 900px) {
+  main {
+    max-width: 960px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .balance-card {
+    grid-column: 1 / -1;
+  }
+
+  .transactions-section {
+    grid-column: 1 / -1;
+  }
 }
