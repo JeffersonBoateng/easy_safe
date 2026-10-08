@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasySafe - Transactions</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-logo">EasySafe</div>
+
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-item">Dashboard</a>
+        <a href="accounts.html" class="nav-item">Accounts</a>
+        <a href="categories.html" class="nav-item">Categories</a>
+        <a href="transactions.html" class="nav-item active">Transactions</a>
+      </nav>
+
+      <button id="logout-btn" class="sidebar-logout">Logout</button>
+    </aside>
+
+    <div class="main-content">
+      <header class="content-topbar">
+        <h2 id="welcome-msg"></h2>
+      </header>
+
+      <section class="transactions-section">
+        <div class="section-header">
+          <h3>Transactions</h3>
+          <button id="toggle-add-tx" class="small-btn">+ Add Transaction</button>
+        </div>
+
+        <form id="transaction-form" class="tx-form hidden">
+          <select id="tx-account-id" required></select>
+          <select id="tx-category-id" required></select>
+          <input type="number" id="tx-amount" placeholder="Amount" step="0.01" required>
+          <select id="tx-type" required>
+            <option value="deposit">Deposit</option>
+            <option value="withdrawal">Withdrawal</option>
+          </select>
+          <button type="submit">Save</button>
+        </form>
+
+        <ul id="transaction-list" class="transaction-list"></ul>
+      </section>
+
+      <footer class="site-footer">© 2026 EasySafe</footer>
+    </div>
+  </div>
+
+  <script src="transactions.js"></script>
+</body>
+</html>
